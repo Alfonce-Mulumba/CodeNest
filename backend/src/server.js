@@ -1,9 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-
 import { corsOptions } from "./config/corsConfig.js";
 import { apiLimiter } from "./middleware/rateLimiter.js";
+import adminRoutes from "./routes/adminRoutes.js";
 import serviceRoutes from "./routes/serviceRoutes.js";
 import portfolioRoutes from "./routes/portfolioRoutes.js";
 import bookingRoutes from "./routes/bookingRoutes.js";
@@ -23,16 +23,14 @@ app.use(express.json());
 app.use(cors(corsOptions));
 app.use("/api", apiLimiter);
 
-// API routes
 app.use("/api/services", serviceRoutes);
 app.use("/api/portfolio", portfolioRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/auth", authRoutes);
-
-// error handler
+app.use("/api/admin", adminRoutes);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`✅ CodeNest backend running on port ${PORT}`);
+  console.log(`✅ CodeNest server running on port ${PORT}`);
 });

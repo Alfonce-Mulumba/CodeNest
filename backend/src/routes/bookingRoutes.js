@@ -1,8 +1,17 @@
 import express from "express";
-import { getAllBookings, createBooking } from "../controllers/bookingController.js";
+import {
+  getAllBookings,
+  getMyBookings,
+  createBooking,
+} from "../controllers/bookingController.js";
+import { verifyToken, isAdmin } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
-router.get("/", getAllBookings);
-router.post("/", createBooking);
+
+router.get("/", verifyToken, isAdmin, getAllBookings);
+
+router.get("/my", verifyToken, getMyBookings);
+
+router.post("/", verifyToken, createBooking);
 
 export default router;

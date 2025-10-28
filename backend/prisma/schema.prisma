@@ -7,31 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Service {
-  id          Int      @id @default(autoincrement())
-  title       String   @unique
-  description String
-  createdAt   DateTime @default(now())
-}
-
-model Project {
-  id          Int      @id @default(autoincrement())
-  title       String   @unique
-  description String
-  githubLink  String?
-  liveLink    String?
-  imageUrl    String?
-  createdAt   DateTime @default(now())
-}
-
-model Booking {
-  id         Int      @id @default(autoincrement())
-  clientName String
-  service    String
-  status     String   @default("Pending")
-  createdAt  DateTime @default(now())
-}
-
 model User {
   id                Int       @id @default(autoincrement())
   name              String
@@ -43,4 +18,36 @@ model User {
   resetToken        String?
   resetTokenExpiry  DateTime?
   createdAt         DateTime  @default(now())
+  bookings          Booking[]
+}
+
+model Service {
+  id          Int      @id @default(autoincrement())
+  title       String   @unique
+  description String
+  price       Float    @default(0.0)
+  createdAt   DateTime @default(now())
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String   @unique
+  description String
+  price       Float?   @default(0.0)
+  githubLink  String?
+  liveLink    String?
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+}
+
+model Booking {
+  id         Int      @id @default(autoincrement())
+  clientName String
+  service    String
+  price      Float?   @default(0.0)
+  status     String   @default("Pending")
+  createdAt  DateTime @default(now())
+  userId     Int? // <-- link to User
+
+  user User? @relation(fields: [userId], references: [id])
 }

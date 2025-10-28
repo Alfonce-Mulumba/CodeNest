@@ -18,3 +18,17 @@ export const addService = async (req, res, next) => {
     next(error);
   }
 };
+
+export const deleteService = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    await prisma.service.delete({
+      where: { id: Number(id) },
+    });
+
+    res.json({ message: "Service deleted successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
