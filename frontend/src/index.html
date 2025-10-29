@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeNest Developers</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/6f3b4d5b8c.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <h1 class="logo">CodeNest<span>Developers</span></h1>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="hero fade-in">
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <h2>Building Digital Experiences that Inspire</h2>
+    <p>We create responsive websites, smart digital solutions, and stunning portfolios for modern brands.</p>
+    <a href="#services" class="btn">Explore Services</a>
+  </div>
+</section>
+
+  <!-- Services -->
+  <section id="services" class="section fade-in">
+    <h2 class="section-title">Our Services</h2>
+    <div class="container grid">
+      <div class="card">
+        <img src="https://pixabay.com/photos/computer-macbook-tablet-editing-767781/" alt="Web Development" class="service-img">
+        <h3>Web Development</h3>
+        <p>Custom websites and full-stack solutions using modern frameworks for speed, security, and performance.</p>
+        <button class="btn book-btn">Book Now</button>
+      </div>
+      <div class="card">
+        <img src="https://pixabay.com/photos/computer-macbook-tablet-editing-767781/"Academic Writing" class="service-img">
+        <h3>Academic Writing</h3>
+        <p>Expert academic writing with proper citations, formatting, and plagiarism-free research work.</p>
+        <button class="btn book-btn">Book Now</button>
+      </div>
+      <div class="card">
+        <img src="https://source.unsplash.com/400x250/?digital,marketing" alt="Digital Marketing" class="service-img">
+        <h3>Digital Marketing</h3>
+        <p>SEO optimization, social media strategy, and creative campaigns to grow your digital footprint.</p>
+        <button class="btn book-btn">Book Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Modal -->
+  <div id="bookingModal" class="modal">
+    <div class="modal-content fade-in">
+      <span class="close">&times;</span>
+      <h2>Book a Service</h2>
+      <form class="booking-form" id="bookingForm">
+        <input type="text" placeholder="Full Name" required>
+        <input type="email" placeholder="Email Address" required>
+        <select required>
+          <option value="">Select Service</option>
+          <option>Web Development</option>
+          <option>Academic Writing</option>
+          <option>Digital Marketing</option>
+        </select>
+        <textarea rows="4" placeholder="Describe your request..." required></textarea>
+        <button type="submit" class="btn">Submit Booking</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Success Toast -->
+  <div id="successToast">✅ Booking Sent Successfully!</div>
+
+  <!-- Portfolio -->
+  <section id="portfolio" class="section dark fade-in">
+    <h2 class="section-title">Recent Projects</h2>
+    <div class="container grid">
+      <div class="portfolio-item">
+        <img src="https://source.unsplash.com/500x300/?website,ui" alt="Project 1">
+        <div class="portfolio-text">
+          <h3>Business Website</h3>
+          <a href="#"><i class="fas fa-external-link-alt"></i> View Project</a>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img src="https://source.unsplash.com/500x300/?dashboard,code" alt="Project 2">
+        <div class="portfolio-text">
+          <h3>Admin Dashboard</h3>
+          <a href="#"><i class="fas fa-external-link-alt"></i> View Project</a>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img src="https://source.unsplash.com/500x300/?landingpage,html" alt="Project 3">
+        <div class="portfolio-text">
+          <h3>Landing Page</h3>
+          <a href="#"><i class="fas fa-external-link-alt"></i> View Project</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section fade-in">
+    <h2 class="section-title">About Us</h2>
+    <div class="container about">
+      <img src="https://source.unsplash.com/500x400/?team,developers" alt="Team">
+      <div>
+        <h3>Who We Are</h3>
+        <p>At <strong>CodeNest Developers</strong>, we are a team of dedicated web and digital experts helping businesses thrive online. Our mission is to deliver creative, data-driven, and reliable solutions that inspire trust and growth.</p>
+        <p><strong>Mission:</strong> To empower innovation through technology, design, and excellence.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section dark fade-in">
+    <h2 class="section-title">Get in Touch</h2>
+    <div class="container contact">
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Email Address" required>
+        <textarea placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+      <div class="socials">
+        <h3>Connect with Us</h3>
+        <p><i class="fas fa-envelope"></i> info@codenest.dev</p>
+        <p><i class="fab fa-twitter"></i> @CodeNestDev</p>
+        <p><i class="fab fa-linkedin"></i> CodeNest Developers</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 CodeNest Developers | Designed with ❤️ by the CodeNest Team <strong>Trojan & Ayodo</strong></p>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    // Fade-in Animation
+    const fadeElems = document.querySelectorAll('.fade-in');
+    const appearOptions = { threshold: 0.2 };
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('appear');
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+    fadeElems.forEach(elem => appearOnScroll.observe(elem));
+
+    // Booking Modal Logic
+    const modal = document.getElementById("bookingModal");
+    const bookBtns = document.querySelectorAll(".book-btn");
+    const closeBtn = document.querySelector(".close");
+    const bookingForm = document.getElementById("bookingForm");
+    const successToast = document.getElementById("successToast");
+
+    bookBtns.forEach(btn => {
+      btn.addEventListener("click", () => modal.style.display = "flex");
+    });
+
+    closeBtn.addEventListener("click", () => modal.style.display = "none");
+    window.addEventListener("click", e => {
+      if (e.target === modal) modal.style.display = "none";
+    });
+
+    // Success Toast
+    bookingForm.addEventListener("submit", e => {
+      e.preventDefault();
+      modal.style.display = "none";
+      successToast.classList.add("show");
+      setTimeout(() => successToast.classList.remove("show"), 3000);
+      bookingForm.reset();
+    });
+  </script>
+</body>
+</html>
