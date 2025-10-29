@@ -9,7 +9,6 @@ import {
 
 const router = express.Router();
 
-// Authentication routes
 router.post("/register", register);
 router.post("/login", login);
 router.post("/verify", verifyUser);
