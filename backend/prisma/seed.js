@@ -8,9 +8,6 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("🌱 Starting database seed...");
 
-  // -----------------------------
-  // 🌐 Seed Services
-  // -----------------------------
   const services = [
     { title: "Web Development", description: "Full-stack website development using modern technologies." },
     { title: "Academic Writing", description: "High-quality research and academic writing services." },
@@ -27,9 +24,6 @@ async function main() {
 
   console.log("✅ Services seeded successfully.");
 
-  // -----------------------------
-  // 💼 Seed Projects
-  // -----------------------------
   const projects = [
     {
       title: "E-Commerce Platform",
@@ -51,9 +45,6 @@ async function main() {
 
   console.log("✅ Projects seeded successfully.");
 
-  // -----------------------------
-  // 👑 Seed Admin User
-  // -----------------------------
   const adminEmail = "alfoncemulumba@gmail.com";
   const existingAdmin = await prisma.user.findUnique({
     where: { email: adminEmail },

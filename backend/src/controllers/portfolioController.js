@@ -1,21 +1,28 @@
 import { prisma } from "../config/db.js";
 
-export const getPortfolio = async (req, res, next) => {
+export const getAllProjects = async (req, res, next) => {
   try {
-    const projects = await prisma.project.findMany();
+    const projects = await prisma.project.findMany({
+      orderBy: { createdAt: "desc" },
+    });
     res.json(projects);
   } catch (error) {
     next(error);
   }
 };
 
-export const addProject = async (req, res, next) => {
+export const getProjectById = async (req, res, next) => {
   try {
-    const { title, description, githubLink, liveLink, imageUrl } = req.body;
-    const newProject = await prisma.project.create({
-      data: { title, description, githubLink, liveLink, imageUrl },
+    const { id } = req.params;
+    const project = await prisma.project.findUnique({
+      where: { id: Number(id) },
     });
-    res.status(201).json({ message: "Project added successfully", newProject });
+
+    if (!project) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+
+    res.json(project);
   } catch (error) {
     next(error);
   }

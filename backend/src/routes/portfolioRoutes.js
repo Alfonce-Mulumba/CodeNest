@@ -1,17 +1,9 @@
 import express from "express";
-import {
-  getAllBookings,
-  getMyBookings,
-  createBooking,
-} from "../controllers/bookingController.js";
-import { verifyToken, isAdmin } from "../middleware/authMiddleware.js";
+import { getAllProjects, getProjectById } from "../controllers/portfolioController.js";
 
 const router = express.Router();
 
-router.get("/", verifyToken, isAdmin, getAllBookings);
-
-router.get("/my", verifyToken, getMyBookings);
-
-router.post("/", verifyToken, createBooking);
+router.get("/", getAllProjects);
+router.get("/:id", getProjectById);
 
 export default router;
