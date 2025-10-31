@@ -8,7 +8,7 @@
 
 body {
   color: #222;
-  background: #f9f9fb;
+  background: #ded8d8;
   line-height: 1.6;
 }
 
@@ -18,7 +18,6 @@ body {
   margin: auto;
 }
 
-/* Navbar */
 header {
   background: #fff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -33,36 +32,70 @@ header {
   align-items: center;
   padding: 1rem 0;
 }
-
 .logo {
-  font-weight: 700;
-  color: #1b1b1b;
-  font-size: 1.4rem;
+  display: flex;
+  align-items: left;
+  font-style: italic;
+  text-shadow: #1b1b1b 1px 3px 2px;
+  font-weight: 900;
+  color: #000;
+  font-size: 30px;
   letter-spacing: 1px;
+  margin-left: 0;
+  gap: 5px;
+}
+
+#iconx {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .logo span {
-  color: #6610f2;
+  font-style: italic;
+  color: #6204fa;
+  font-size: 35px;
 }
-
-nav ul {
+.nav ul {
   list-style: none;
   display: flex;
-  gap: 1.5rem;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
 }
 
-nav a {
+.nav a {
   text-decoration: none;
-  color: #333;
-  font-weight: 500;
-  transition: color 0.3s ease;
+  color: #000;
+  font-weight: 600;
+  font-size: 18px;
+  position: relative;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
-nav a:hover {
-  color: #6610f2;
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background-color: #6204fa;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+.nav a:hover {
+  transform: scale(0.9);
+  color: #6204fa;
 }
 
-/* Hero Section */
+.nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
 .hero-overlay {
   position: absolute;
   top: 0; left: 0;
@@ -70,7 +103,6 @@ nav a:hover {
   background: linear-gradient(135deg, rgba(102,16,242,0.7), rgba(0,0,0,0.7));
   animation: fadeOverlay 2s ease-in-out;
 }
-
 
 .hero-overlay {
   position: absolute;
@@ -89,6 +121,8 @@ nav a:hover {
   position: relative;
   z-index: 10;
   animation: fadeSlide 2s ease-out;
+  border-radius: 20px;
+  text-align: center;
 }
 
 @keyframes fadeSlide {
@@ -126,7 +160,6 @@ nav a:hover {
   box-shadow: 0 0 15px rgba(102,16,242,0.5);
 }
 
-/* Section */
 .section {
   padding: 5rem 1rem;
   text-align: center;
@@ -153,14 +186,14 @@ nav a:hover {
   border-radius: 3px;
 }
 
-/* Grid */
 .grid {
   display: grid;
+  text-size-adjust: 1rem;
+  max-height: fit-content;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
 }
 
-/* Service Cards */
 .card {
   background: #fff;
   padding: 2rem;
@@ -174,7 +207,10 @@ nav a:hover {
   box-shadow: 0 6px 20px rgba(102,16,242,0.25);
   border: 2px solid #6610f2;
 }
-
+.p{
+  text-align: center;
+  font-size: 0.8rem;
+}
 .service-img {
   width: 100%;
   height: 180px;
@@ -187,14 +223,39 @@ nav a:hover {
 .card:hover .service-img {
   transform: scale(1.05);
 }
-
-/* Portfolio */
-.portfolio-item {
-  border-radius: 12px;
-  overflow: hidden;
-  background: #1b1b1b;
-  transition: transform 0.3s;
+#portfolio{
+  margin-top: 1px;
 }
+.portfolio-item {
+  height: 300px;
+  border-radius: 30px;
+  overflow: hidden;
+  background: #f0eded;
+  transition: transform 0.3s;
+  height: auto;
+  margin-top: 1px;
+}
+.view-btn {
+  display: inline-block;
+  background: #fafafa;
+  color: #000000;
+  padding: 10px 16px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 900;
+  margin-top: 2px;
+  transition: 1s ease, transform 0.8s ease;
+}
+
+.view-btn i {
+  margin-right: 6px;
+}
+
+.view-btn:hover {
+  background: #1003d2;
+  transform: translateY(-2px);
+}
+
 
 .portfolio-item:hover {
   transform: translateY(-5px);
@@ -202,13 +263,19 @@ nav a:hover {
 }
 
 .portfolio-item img {
+  background-color: rgb(243, 243, 243);
   width: 100%;
-  height: auto;
+  height: 70%;
+  object-fit: cover;
   display: block;
+  border-radius: 20px;
 }
 
 .portfolio-text {
   padding: 1rem;
+  background-color: #edeaea;
+  text-align: center;
+  color: #000;
 }
 
 .portfolio-text a {
@@ -217,46 +284,47 @@ nav a:hover {
   text-decoration: none;
 }
 
-/* About */
 .about {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
-  gap: 2rem;
-  text-align: left;
+  gap: 1px;
+  text-align: justify;
+  margin-top: 2px;
 }
 
 .about img {
-  flex: 1;
-  max-width: 450px;
-  border-radius: 10px;
+  width: 48%;
+  border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  object-fit: cover;
 }
-
-/* Contact */
-.contact {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
-  align-items: flex-start;
+.about div {
+  flex: 1 1 100%;
+  margin-top: 1rem;
+}
+.about img:hover{
+  transform: scale(1.05);
+  transition: 1s;
 }
 
 form {
+  background-color: #ffffff;
   flex: 1;
-  min-width: 300px;
+  width: 100%;
 }
 
 input, textarea {
+  background-color: #c2bbbb;
   width: 100%;
   padding: 0.8rem;
-  margin-bottom: 1rem;
-  border-radius: 5px;
-  border: none;
-  outline: none;
+  margin-bottom: 3px;
+  border-radius: 20px;
+  border: rgb(0, 0, 0);
 }
 
-button {
+#btn book-btn{
   background: #6610f2;
   color: white;
   padding: 0.7rem 1.5rem;
@@ -266,16 +334,10 @@ button {
   transition: 0.3s;
 }
 
-button:hover {
-  background: #4b0db8;
+#btn book-btn:hover {
+  background: rgb(22, 9, 46);
 }
 
-.socials i {
-  color: #6610f2;
-  margin-right: 0.5rem;
-}
-
-/* Modal */
 .modal {
   display: none;
   position: fixed;
@@ -284,20 +346,19 @@ button:hover {
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.7);
   justify-content: center;
   align-items: center;
 }
 
 .modal-content {
-  background: #fff;
-  border-radius: 12px;
+  background: #ffffff;
+  border-radius: 50px;
   padding: 2rem;
   width: 90%;
   max-width: 500px;
   position: relative;
-  animation: scaleIn 0.4s ease;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  animation: scaleIn 1.4s ease;
+  box-shadow: 0 10px 30px rgba(25, 23, 23, 0.3);
 }
 
 .modal-content h2 {
@@ -311,11 +372,10 @@ button:hover {
   top: 15px;
   right: 20px;
   font-size: 1.5rem;
-  color: #333;
+  color: #e7dfdf;
   cursor: pointer;
 }
 
-/* Toast */
 #successToast {
   position: fixed;
   bottom: -60px;
@@ -329,7 +389,7 @@ button:hover {
   font-size: 0.95rem;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
   opacity: 0;
-  transition: all 0.6s ease;
+  transition: all 1.5s ease;
   z-index: 3000;
 }
 
@@ -338,16 +398,14 @@ button:hover {
   opacity: 1;
 }
 
-/* Footer */
 footer {
   text-align: center;
-  background: #000;
-  color: #fff;
+  background: #f6f2f2;
+  color: #000000;
   padding: 1.5rem;
   font-size: 0.9rem;
 }
 
-/* Animations */
 .fade-in {
   opacity: 0;
   transform: translateY(40px);
@@ -363,3 +421,101 @@ footer {
   from { transform: scale(0.8); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+/* Email / Phone / Website links */
+.line {
+  color: rgb(14, 14, 246);
+  cursor: pointer;
+  text-transform: none;
+}
+
+.line:hover {
+  color: rgb(7, 7, 179);
+  text-decoration: none;
+}
+
+/* Contact info line layout */
+.contact-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 18px;
+  margin-bottom: 20px;
+  text-transform: none !important;
+}
+
+.contact-info a {
+  text-decoration: none;
+  color: #000;
+  transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+  color: #6204fa;
+}
+
+.separator {
+  color: #999;
+  font-weight: 300;
+}
+
+/* Social media icons */
+.social-links {
+  text-align: center;
+}
+
+.social-icon {
+  display: inline-block;
+  font-size: 24px;
+  color: #333;
+  margin: 0 10px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.2);
+  color: #6204fa;
+}
+
+/* Optional: section styling */
+#contact {
+  padding: 40px 0;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 25px;
+}
+
+/* Hover colors for specific icons */
+.social-icon .fa-whatsapp:hover {
+  color: #25D366;
+}
+
+.social-icon .fa-phone-alt:hover {
+  color: #28a745;
+}
+.social-icon .fa-globe:hover {
+  color: #007bff;
+}
+.social-icon .fa-envelope:hover {
+  color: #ff4500;
+}
+.social-icon .fa-github:hover {
+  color: #333;
+}
+.social-icon .fa-linkedin:hover {
+  color: #0077b5;
+}
+.social-icon .fa-twitter:hover {
+  color: #1DA1F2;
+}
+.social-icon .fa-facebook:hover {
+  color: #3b5998;
+}
+.social-icon .fa-instagram:hover {
+  color: #E1306C;
+}
+

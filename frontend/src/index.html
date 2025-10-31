@@ -6,13 +6,15 @@
   <title>CodeNest Developers</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <script src="https://kit.fontawesome.com/6f3b4d5b8c.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <!-- Header -->
   <header>
     <div class="container nav">
-      <h1 class="logo">CodeNest<span>Developers</span></h1>
+      <h1 class="logo"><video src="assets/software.mp4" id="iconx" autoplay loop muted playsinline></video>
+        CodeNest<span style="margin-top: 4px; margin-bottom: -2px;">Developers</span></h1>
       <nav>
         <ul>
           <li><a href="#home">Home</a></li>
@@ -29,6 +31,7 @@
   <section id="home" class="hero fade-in">
   <div class="hero-overlay"></div>
   <div class="container hero-content">
+    <br><br><br>
     <h2>Building Digital Experiences that Inspire</h2>
     <p>We create responsive websites, smart digital solutions, and stunning portfolios for modern brands.</p>
     <a href="#services" class="btn">Explore Services</a>
@@ -40,19 +43,19 @@
     <h2 class="section-title">Our Services</h2>
     <div class="container grid">
       <div class="card">
-        <img src="https://pixabay.com/photos/computer-macbook-tablet-editing-767781/" alt="Web Development" class="service-img">
+        <img src="assets/code.jpg" alt="Web Development" class="service-img">
         <h3>Web Development</h3>
         <p>Custom websites and full-stack solutions using modern frameworks for speed, security, and performance.</p>
         <button class="btn book-btn">Book Now</button>
       </div>
       <div class="card">
-        <img src="https://pixabay.com/photos/computer-macbook-tablet-editing-767781/" alt="service-img">
+        <img style="height: 48%; width: 100%; border-radius: 12px" src="assets/writing.jpg" alt="service-img">
         <h3>Academic Writing</h3>
         <p>Expert academic writing with proper citations, formatting, and plagiarism-free research work.</p>
-        <button class="btn book-btn">Book Now</button>
+        <br><button class="btn book-btn">Book Now</button>
       </div>
       <div class="card">
-        <img src="https://source.unsplash.com/400x250/?digital,marketing" alt="Digital Marketing" class="service-img">
+        <img style="height: 48%; width: 100%; border-radius:  12px" src="assets/SEO.jpg" alt="Digital Marketing" class="service-img">
         <h3>Digital Marketing</h3>
         <p>SEO optimization, social media strategy, and creative campaigns to grow your digital footprint.</p>
         <button class="btn book-btn">Book Now</button>
@@ -64,48 +67,52 @@
   <div id="bookingModal" class="modal">
     <div class="modal-content fade-in">
       <span class="close">&times;</span>
-      <h2>Book a Service</h2>
+      <h2 style="cursor: pointer; font-style: normal"><u>Book a Service</u></h2>
       <form class="booking-form" id="bookingForm">
         <input type="text" placeholder="Full Name" required>
-        <input type="email" placeholder="Email Address" required>
-        <select required>
+        <input type="email" placeholder="Enter your Email" required>
+        <select required  style="border-radius: 20px; border: rgb(248, 244, 244); margin: 2px">
           <option value="">Select Service</option>
           <option>Web Development</option>
           <option>Academic Writing</option>
           <option>Digital Marketing</option>
         </select>
-        <textarea rows="4" placeholder="Describe your request..." required></textarea>
-        <button type="submit" class="btn">Submit Booking</button>
+        <textarea rows="4" placeholder="Provide more information about your request..." required></textarea>
+        <button type="submit" class="btn">Submit</button>
       </form>
     </div>
   </div>
 
   <!-- Success Toast -->
   <div id="successToast">✅ Booking Sent Successfully!</div>
-
+<hr>
   <!-- Portfolio -->
-  <section id="portfolio" class="section dark fade-in">
+  <section id="portfolio" class="section white fade-in">
     <h2 class="section-title">Recent Projects</h2>
     <div class="container grid">
       <div class="portfolio-item">
-        <img src="https://source.unsplash.com/500x300/?website,ui" alt="Project 1">
+        <img src="assets/web.jpg" alt="Project 1">
         <div class="portfolio-text">
-          <h3>Business Website</h3>
-          <a href="#"><i class="fas fa-external-link-alt"></i> View Project</a>
+          <h3>E-Commerce Website</h3>
+          <a href="https://netsoko-mall-1.onrender.com/" target="_blank" class="view-btn">
+            <i class="fas fa-external-link-alt"></i> View Project</a>
+
+      </div>
+      </div>
+      <div class="portfolio-item">
+        <img src="assets/git.jpg" alt="Project 2">
+        <div class="portfolio-text">
+          <h3>GitHub Profile</h3>
+          <a href="https://netsoko-mall-1.onrender.com/" target="_blank" class="view-btn">
+          <i class="fas fa-external-link-alt"></i>View Profile</a>
         </div>
       </div>
       <div class="portfolio-item">
-        <img src="https://source.unsplash.com/500x300/?dashboard,code" alt="Project 2">
+        <img src="assets/code2.png" alt="Project 3">
         <div class="portfolio-text">
-          <h3>Admin Dashboard</h3>
-          <a href="#"><i class="fas fa-external-link-alt"></i> View Project</a>
-        </div>
-      </div>
-      <div class="portfolio-item">
-        <img src="https://source.unsplash.com/500x300/?landingpage,html" alt="Project 3">
-        <div class="portfolio-text">
-          <h3>Landing Page</h3>
-          <a href="#"><i class="fas fa-external-link-alt"></i> View Project</a>
+          <h3>UI/UX</h3>
+          <a href="https://netsoko-mall-1.onrender.com/" target="_blank" class="view-btn">
+          <i class="fas fa-external-link-alt"></i>View Project</a>
         </div>
       </div>
     </div>
@@ -115,8 +122,9 @@
   <section id="about" class="section fade-in">
     <h2 class="section-title">About Us</h2>
     <div class="container about">
-      <img src="https://source.unsplash.com/500x400/?team,developers" alt="Team">
-      <div>
+      <img src="assets/team.jpg" alt="Team"><hr>
+      <img src="assets/team2.jpg" alt="Mission">
+      <div  style="text-align: center;">
         <h3>Who We Are</h3>
         <p>At <strong>CodeNest Developers</strong>, we are a team of dedicated web and digital experts helping businesses thrive online. Our mission is to deliver creative, data-driven, and reliable solutions that inspire trust and growth.</p>
         <p><strong>Mission:</strong> To empower innovation through technology, design, and excellence.</p>
@@ -125,27 +133,62 @@
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="section dark fade-in">
-    <h2 class="section-title">Get in Touch</h2>
-    <div class="container contact">
-      <form>
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Email Address" required>
-        <textarea placeholder="Your Message" rows="5" required></textarea>
-        <button type="submit" class="btn">Send Message</button>
-      </form>
-      <div class="socials">
-        <h3>Connect with Us</h3>
-        <p><i class="fas fa-envelope"></i> info@codenest.dev</p>
-        <p><i class="fab fa-twitter"></i> @CodeNestDev</p>
-        <p><i class="fab fa-linkedin"></i> CodeNest Developers</p>
+<section id="contact" class="section light fade-in">
+  <h2 class="section-title">Contact Us</h2>
+  <div class="container contact">
+    <div class="socials">
+      <!-- Contact info in one line -->
+      <div class="contact-info">
+        <span>
+          <strong>Email:</strong>
+          <a href="mailto:codenest.devs@gmail.com" class="line">
+            <i class="fas fa-envelope"></i> <u style="color:blue">info@codenest.dev</u></a>
+        </span>
+        <span class="separator">|</span>
+        <span>
+          <strong>Phone:</strong>
+          <a href="tel:+254701156348" class="line">
+            <i class="fas fa-phone-alt"></i> <u style="color:blue">+254 701 156 348</u>
+          </a>
+        </span>
+        <span class="separator">|</span>
+        <span>
+          <strong>Website:</strong>
+          <a href="https://www.codenest.dev" target="_blank" class="line">
+            <i class="fas fa-globe"></i> <u style="color:blue">www.codenest.dev</u></a>
+        </span>
+      </div>
+
+      <!-- Social icons centered below -->
+      <div class="social-links">
+        <a href="https://facebook.com/YourPage" target="_blank" class="social-icon">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://twitter.com/YourProfile" target="_blank" class="social-icon">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://linkedin.com/in/YourProfile" target="_blank" class="social-icon">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://instagram.com/YourProfile" target="_blank" class="social-icon">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="tel:+254701156348" class="social-icon">
+          <i class="fas fa-phone-alt"></i>
+        </a>
+        <a href="https://wa.me/254701156348?text=Hello%20CodeNest%20Developers!" target="_blank" class="social-icon">
+          <i class="fab fa-whatsapp"></i>
+        </a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+
 
   <!-- Footer -->
   <footer>
-    <p>© 2025 CodeNest Developers | Designed with ❤️ by the CodeNest Team <strong>Trojan & Ayodo</strong></p>
+    <p background-color: white>© 2025 CodeNest Developers | Designed with ❤️ by the CodeNest Team <strong>Trojan & Ayodo</strong></p>
   </footer>
 
   <!-- JS -->
