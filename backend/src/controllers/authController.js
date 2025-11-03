@@ -7,74 +7,111 @@ import { sendEmail } from "../utils/sendEmail.js";
 const SECRET = process.env.JWT_SECRET || "supersecret";
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
 
-// ✅ Register User
+// ✅ Register User — generate 6-digit code
 export const register = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
 
     const existing = await prisma.user.findUnique({ where: { email } });
-    if (existing) return res.status(400).json({ message: "Email already registered" });
+    if (existing)
+      return res.status(400).json({ message: "Email already registered" });
 
     const hashed = await bcrypt.hash(password, 10);
-    const verificationToken = crypto.randomBytes(32).toString("hex");
+    const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
 
     const user = await prisma.user.create({
-      data: { name, email, password: hashed, verificationToken },
+      data: { name, email, password: hashed, verificationCode },
     });
 
-    const verifyLink = `${FRONTEND_URL}/verify?token=${verificationToken}&email=${email}`;
     await sendEmail(
       email,
-      "Verify your CodeNest Account",
+      "Verify Your CodeNest Account",
       `<p>Hello ${name},</p>
-      <p>Please verify your account by clicking this link:</p>
-      <a href="${verifyLink}">${verifyLink}</a>`
+      <p>Your verification code is:</p>
+      <h2 style="color:#2b7a78; letter-spacing:2px;">${verificationCode}</h2>
+      <p>Enter this code on the verification page to activate your account.</p>`
     );
 
-    res.status(201).json({ message: "User registered. Check email to verify account." });
+    res
+      .status(201)
+      .json({ message: "User registered. Check your email for a 6-digit code." });
   } catch (error) {
+    console.error("❌ Registration error:", error);
     next(error);
   }
 };
 
-// ✅ Verify Email
+// ✅ Verify Email — check 6-digit code
 export const verifyUser = async (req, res, next) => {
   try {
-    const { email, token } = req.body;
-    const user = await prisma.user.findUnique({ where: { email } });
+    const { email, code } = req.body;
 
-    if (!user || user.verificationToken !== token)
-      return res.status(400).json({ message: "Invalid token or user" });
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    if (user.verified)
+      return res.status(400).json({ message: "Account already verified" });
+
+    if (user.verificationCode !== code)
+      return res.status(400).json({ message: "Invalid verification code" });
 
     await prisma.user.update({
       where: { email },
-      data: { verified: true, verificationToken: null },
+      data: { verified: true, verificationCode: null },
     });
 
-    res.json({ message: "Account verified successfully" });
+    res.json({ message: "Account verified successfully!" });
   } catch (error) {
+    console.error("❌ Verification error:", error);
     next(error);
   }
 };
 
 // ✅ Login User
+// ✅ Login User
 export const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
+
+    // Find user by email only
     const user = await prisma.user.findUnique({ where: { email } });
+    if (!user)
+      return res.status(400).json({ message: "Invalid email or password" });
 
-    if (!user) return res.status(401).json({ message: "User not found" });
-    if (!user.verified) return res.status(401).json({ message: "Please verify your email first" });
+    // Check if user is verified
+    if (!user.verified)
+      return res
+        .status(400)
+        .json({ message: "Please verify your account before logging in." });
 
-    const match = await bcrypt.compare(password, user.password);
-    if (!match) return res.status(401).json({ message: "Invalid credentials" });
+    // Compare password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch)
+      return res.status(400).json({ message: "Invalid email or password" });
 
-    const token = jwt.sign({ id: user.id, role: user.role }, SECRET, { expiresIn: "1d" });
-    res.json({ message: "Login successful", token });
+    // Generate JWT token
+    const token = jwt.sign(
+      { id: user.id, email: user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    // Send response
+    res.status(200).json({
+      message: "Login successful",
+      token,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+    });
   } catch (error) {
     next(error);
   }
 };
+
 
 // ✅ Forgot Password (send reset link)
 export const forgotPassword = async (req, res, next) => {
