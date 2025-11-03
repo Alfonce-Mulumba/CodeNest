@@ -40,8 +40,25 @@ const Home = () => {
       },
       { threshold: 0.2 }
     );
-    fadeElems.forEach(elem => appearOnScroll.observe(elem));
-  }, []);
+     fadeElems.forEach(elem => appearOnScroll.observe(elem));
+
+  // 👇 Auto-hide navbar on scroll
+  let lastScrollY = window.scrollY;
+  const navbar = document.querySelector("header");
+
+  const handleScroll = () => {
+    if (!navbar) return;
+    if (window.scrollY > lastScrollY && window.scrollY > 80) {
+      navbar.classList.add("navbar--hidden");
+    } else {
+      navbar.classList.remove("navbar--hidden");
+    }
+    lastScrollY = window.scrollY;
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
 
   // Redirect to booking page
   const handleBookClick = (serviceTitle) => {
@@ -69,7 +86,7 @@ const Home = () => {
             />
             CodeNest
             <span>
-              <sup>Developers</sup>
+              <sub>Developers</sub>
             </span>
           </h1>
 
