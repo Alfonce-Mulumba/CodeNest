@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "../api/api.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 
 const API = import.meta.env.VITE_API_BASE_URL;
 
@@ -42,25 +46,44 @@ const Home = () => {
     );
      fadeElems.forEach(elem => appearOnScroll.observe(elem));
 
-  // 👇 Auto-hide navbar on scroll
-  let lastScrollY = window.scrollY;
-  const navbar = document.querySelector("header");
+// Auto-hide navbar with smart reveal (only at top or on hover)
+let lastScrollY = window.scrollY;
+const navbar = document.querySelector("header");
 
-  const handleScroll = () => {
-    if (!navbar) return;
-    if (window.scrollY > lastScrollY && window.scrollY > 80) {
-      navbar.classList.add("navbar--hidden");
-    } else {
-      navbar.classList.remove("navbar--hidden");
-    }
-    lastScrollY = window.scrollY;
-  };
+const handleScroll = () => {
+  if (!navbar) return;
 
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, []);
+  const currentScrollY = window.scrollY;
 
-  // Redirect to booking page
+  // Always hide when scrolling down
+  if (currentScrollY > lastScrollY && currentScrollY > 80) {
+    navbar.classList.add("navbar--hidden");
+  }
+
+  // Only show if scrolled back to top
+  if (currentScrollY < 50) {
+    navbar.classList.remove("navbar--hidden");
+  }
+
+  lastScrollY = currentScrollY;
+};
+
+// Show when hovering near the top of the screen
+const handleMouseMove = (e) => {
+  if (e.clientY < 80) {
+    navbar.classList.remove("navbar--hidden");
+  }
+};
+
+window.addEventListener("scroll", handleScroll);
+window.addEventListener("mousemove", handleMouseMove);
+
+return () => {
+  window.removeEventListener("scroll", handleScroll);
+  window.removeEventListener("mousemove", handleMouseMove);
+};
+  }, []);
+
   const handleBookClick = (serviceTitle) => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -132,87 +155,153 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ---------- Services Section ---------- */}
-      <section id="services" className="section fade-in">
-        <h2 className="section-title">Our Services</h2>
-        <div className="container grid">
-          <div className="card">
-            <img src="assets/code.jpg" alt="Web Development" className="service-img" />
-            <h3><u>Web Development</u></h3>
-            <p>Custom websites and full-stack solutions using modern frameworks for speed, security, and performance.</p>
-            <button className="btn" onClick={() => handleBookClick("Web Development")}>
-              Book Now
-            </button>
-          </div>
-          <div className="card">
-            <img src="assets/writing.jpg" alt="Academic Writing" className="service-img" />
-            <h3><u>Academic Writing</u></h3>
-            <p>Expert academic writing with proper citations, formatting, and plagiarism-free research work.</p>
-            <button className="btn" onClick={() => handleBookClick("Academic Writing")}>
-              Book Now
-            </button>
-          </div>
-          <div className="card">
-            <img src="assets/SEO.jpg" alt="Digital Marketing" className="service-img" />
-            <h3><u>Digital Marketing</u></h3>
-            <p>SEO optimization, social media strategy, and creative campaigns to grow your digital footprint.</p>
-            <button className="btn" onClick={() => handleBookClick("Digital Marketing")}>
-              Book Now
-            </button>
-          </div>
-        </div>
-      </section>
+   {/* ---------- Services Section ---------- */}
+<section id="services" className="section fade-in">
+  <h2 className="section-title">Our Services</h2>
+  <div className="container grid">
 
-{/* ---------- Portfolio ---------- */}
+    {/* --- Web Development --- */}
+    <div className="card">
+      <Swiper
+        modules={[Autoplay, Pagination]}
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        loop
+        className="service-swiper"
+      >
+        <SwiperSlide><img src="assets/code.jpg" alt="Web Development" /></SwiperSlide>
+        <SwiperSlide><img src="assets/code7.jpg" alt="Frontend" /></SwiperSlide>
+        <SwiperSlide><img src="assets/code2.png" alt="Backend" /></SwiperSlide>
+        <SwiperSlide><img src="assets/code4.jpg" alt="Backend" /></SwiperSlide>
+        <SwiperSlide><img src="assets/code6.jpg" alt="Backend" /></SwiperSlide>
+
+      </Swiper>
+      <h3><u>Web Development</u></h3>
+      <p>Custom websites and full-stack solutions using modern frameworks for speed, security, and performance.</p>
+      <button className="btn" onClick={() => handleBookClick("Web Development")}>
+        Book Now
+      </button>
+    </div>
+
+    {/* --- Academic Writing --- */}
+    <div className="card">
+      <Swiper
+        modules={[Autoplay, Pagination]}
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 3500, disableOnInteraction: false }}
+        loop
+        className="service-swiper"
+      >
+        <SwiperSlide><img src="assets/writing.jpg" alt="Academic Writing" /></SwiperSlide>
+        <SwiperSlide><img src="assets/academic2.jpg" alt="Research Work" /></SwiperSlide>
+        <SwiperSlide><img src="assets/academic3.jpg" alt="Research Work" /></SwiperSlide>
+
+      </Swiper>
+      <h3><u>Academic Writing</u></h3>
+      <p>Expert academic writing with proper citations, formatting, and plagiarism-free research work.</p>
+      <button className="btn" onClick={() => handleBookClick("Academic Writing")}>
+        Book Now
+      </button>
+    </div>
+
+    {/* --- Digital Marketing --- */}
+    <div className="card">
+      <Swiper
+        modules={[Autoplay, Pagination]}
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 4000, disableOnInteraction: false }}
+        loop
+        className="service-swiper"
+      >
+        <SwiperSlide><img src="assets/SEO.jpg" alt="Digital Marketing" /></SwiperSlide>
+        <SwiperSlide><img src="assets/SEO2.jpg" alt="Campaign Strategy" /></SwiperSlide>
+        <SwiperSlide><img src="assets/SEO3.jpg" alt="Campaign Strategy" /></SwiperSlide>
+
+      </Swiper>
+      <h3><u>Digital Marketing</u></h3>
+      <p>SEO optimization, social media strategy, and creative campaigns to grow your digital footprint.</p>
+      <button className="btn" onClick={() => handleBookClick("Digital Marketing")}>
+        Book Now
+      </button>
+    </div>
+  </div>
+</section>
+
+{/* ---------- Portfolio Section ---------- */}
 <section id="portfolio" className="section white fade-in">
   <h2 className="section-title">Recent Projects</h2>
   <div className="container grid">
+
+    {/* E-Commerce Project */}
     <div className="portfolio-item">
-      <img src="assets/web.jpg" alt="Project 1" />
+      <Swiper
+        modules={[Autoplay, Pagination]}
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 2700, disableOnInteraction: false }}
+        loop
+        className="portfolio-swiper"
+      >
+        <SwiperSlide><img src="assets/web.jpg" alt="E-commerce 1" /></SwiperSlide>
+        <SwiperSlide><img src="assets/SEO4.jpg" alt="E-commerce 2" /></SwiperSlide>
+        <SwiperSlide><img src="assets/SEO5.jpg" alt="E-commerce 2" /></SwiperSlide>
+
+      </Swiper>
       <div className="portfolio-text">
         <h3>E-Commerce Website</h3>
-        <a
-          href="https://netsoko-mall-1.onrender.com/"
-          target="_blank"
-          rel="noreferrer"
-          className="view-btn"
-        >
+        <a href="https://netsoko-mall-1.onrender.com/" target="_blank" rel="noreferrer" className="view-btn">
           <i className="fas fa-external-link-alt"></i> View Project
         </a>
       </div>
     </div>
 
+    {/* GitHub Project */}
     <div className="portfolio-item">
-      <img src="assets/git.jpg" alt="Project 2" />
+      <Swiper
+        modules={[Autoplay, Pagination]}
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 3200, disableOnInteraction: false }}
+        loop
+        className="portfolio-swiper"
+      >
+        <SwiperSlide><img src="assets/git.jpg" alt="GitHub Project 1" /></SwiperSlide>
+        <SwiperSlide><img src="assets/git1.jpg" alt="GitHub Project 2" /></SwiperSlide>
+      </Swiper>
       <div className="portfolio-text">
         <h3>GitHub Profile</h3>
-        <a
-          href="https://github.com/Alfonce-Mulumba"
-          target="_blank"
-          rel="noreferrer"
-          className="view-btn"
-        >
+        <a href="https://github.com/Alfonce-Mulumba" target="_blank" rel="noreferrer" className="view-btn">
           <i className="fas fa-external-link-alt"></i> View Profile
         </a>
       </div>
     </div>
 
+    {/* UI/UX */}
     <div className="portfolio-item">
-      <img src="assets/code2.png" alt="Project 3" />
+      <Swiper
+        modules={[Autoplay, Pagination]}
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 2500, disableOnInteraction: false }}
+        loop
+        className="portfolio-swiper"
+      >
+        <SwiperSlide><img src="assets/code9.jpg" alt="UI/UX 1" /></SwiperSlide>
+        <SwiperSlide><img src="assets/SEO6.jpg" alt="UI/UX 2" /></SwiperSlide>
+      </Swiper>
       <div className="portfolio-text">
-        <h3>UI/UX</h3>
-        <a
-          href="https://netsoko-mall-1.onrender.com/"
-          target="_blank"
-          rel="noreferrer"
-          className="view-btn"
-        >
+        <h3>UI/UX Design</h3>
+        <a href="https://netsoko-mall-1.onrender.com/" target="_blank" rel="noreferrer" className="view-btn">
           <i className="fas fa-external-link-alt"></i> View Project
         </a>
       </div>
     </div>
   </div>
 </section>
+
 
 {/* ---------- About ---------- */}
 <section id="about" className="section fade-in">
@@ -222,7 +311,7 @@ const Home = () => {
     <hr />
     <img src="assets/team2.jpg" alt="Mission" />
     <div style={{ textAlign: "center" }}>
-      <h3>Who We Are</h3>
+      <h3><u>Who We Are</u></h3>
       <p>
         At <strong>CodeNest Developers</strong>, we are a team of dedicated web
         and digital experts helping businesses thrive online. Our mission is to
@@ -242,7 +331,6 @@ const Home = () => {
   <h2 className="section-title">Contact Us</h2>
   <div className="container contact">
     <div className="socials">
-      {/* Contact info in one line */}
       <div className="contact-info">
         <span>
           <strong>Email:</strong>
@@ -274,7 +362,6 @@ const Home = () => {
         </span>
       </div>
 
-      {/* Social icons centered below */}
       <div className="social-links">
         <a
           href="https://facebook.com/YourPage"
@@ -285,7 +372,7 @@ const Home = () => {
           <i className="fab fa-facebook-f"></i>
         </a>
         <a
-          href="https://twitter.com/YourProfile"
+          href="https://x.com/codenest_devs"
           target="_blank"
           rel="noreferrer"
           className="social-icon"
@@ -301,7 +388,7 @@ const Home = () => {
           <i className="fab fa-linkedin-in"></i>
         </a>
         <a
-          href="https://www.instagram.com/a.mulumba_?igsh=NHl4aDM1eTl4amJs"
+          href="https://www.instagram.com/a.mulumba_"
           target="_blank"
           rel="noreferrer"
           className="social-icon"
@@ -333,7 +420,6 @@ const Home = () => {
 </section>
 
 
-      {/* ---------- Footer ---------- */}
       <footer>
         <p>
           © 2025 CodeNest Developers | Designed with ❤️ by <strong>The CodeNest Team</strong>{" "}

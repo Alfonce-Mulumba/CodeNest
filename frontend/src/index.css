@@ -242,7 +242,7 @@ header.scrolled {
   margin-top: -1.5cm;
 }
 .portfolio-item {
-  height: 450px;
+  height: 370px;
   border-radius: 12px;
   overflow: hidden;
   background: transparent;
@@ -285,7 +285,7 @@ header.scrolled {
   padding: 1rem;
   background-color: transparent;
   text-align: center;
-  color: #000;
+  color: #ffffff;
 }
 
 .portfolio-text a {
@@ -406,7 +406,6 @@ footer {
   from { transform: scale(0.8); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
-/* Email / Phone / Website links */
 .line {
   color: rgb(0, 255, 0);
   cursor: pointer;
@@ -418,7 +417,6 @@ footer {
   text-decoration: none;
 }
 
-/* Contact info line layout */
 .contact-info {
   display: flex;
   justify-content: center;
@@ -445,7 +443,6 @@ footer {
   font-weight: 300;
 }
 
-/* Social media icons */
 .social-links {
   text-align: center;
 }
@@ -453,7 +450,7 @@ footer {
 .social-icon {
   display: inline-block;
   font-size: 24px;
-  color: #2bff00;
+  color: #003cff;
   margin: 0 10px;
   transition: transform 1s ease, color 0.7s ease;
 }
@@ -537,12 +534,10 @@ footer {
   transition: 1s;
 }
 
-/* 👇 this ensures it only appears on hover */
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
-/* optional animation */
 .dropdown-content {
   opacity: 0;
   transform: translateY(-5px);
@@ -650,4 +645,28 @@ footer {
 
 .error {
   color: #f55;
+}
+.service-swiper,
+.portfolio-swiper,
+.about-swiper {
+  width: 100%;
+  height: 250px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.service-swiper img, .portfolio-swiper img, .about-swiper img, .service-swiper video, .portfolio-swiper video, .about-swiper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-pagination-bullet {
+  background: #555 !important;
+  opacity: 0.7;
+}
+
+.swiper-pagination-bullet-active {
+  background: #00bfa6 !important;
 }
